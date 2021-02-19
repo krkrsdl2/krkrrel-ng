@@ -1,4 +1,16 @@
-project('krkrrel-ng', ['c', 'cpp'], default_options: ['optimization=3', 'debug=true', 'warning_level=1'], version: 'unknown')
+project(
+	'krkrrel-ng',
+	[
+		'c',
+		'cpp'
+	],
+	default_options: [
+		'optimization=3',
+		'debug=true',
+		'warning_level=1'
+	],
+	version: 'unknown'
+)
 
 cxx = meson.get_compiler('cpp')
 
