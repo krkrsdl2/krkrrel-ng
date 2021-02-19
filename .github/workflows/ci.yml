@@ -52,6 +52,8 @@ jobs:
           submodules: recursive
       - run: sudo apt-get update
       - run: sudo apt-get install build-essential libsdl2-dev mingw-w64
+      - run: sudo update-alternatives --set i686-w64-mingw32-gcc /usr/bin/i686-w64-mingw32-gcc-posix
+      - run: sudo update-alternatives --set i686-w64-mingw32-g++ /usr/bin/i686-w64-mingw32-g++-posix
       - uses: actions/setup-python@v1
         with:
           python-version: '3.x'
