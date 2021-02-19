@@ -1,0 +1,13 @@
+*.o
+.DS_Store
+build-*/krkrsdl2
+build_*/krkrsdl2
+build/krkrsdl2
+*.a
+*.exe
+*.7z
+build-*
+build_*
+build
+.externalNativeBuild
+.gradle
