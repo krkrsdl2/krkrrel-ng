@@ -456,7 +456,7 @@ void TVPAddLog(const ttstr &line, bool appendtoimportant)
 #endif
 #ifdef _WIN32
 	HANDLE hStdOutput = ::GetStdHandle(STD_ERROR_HANDLE);
-	if (hStdOutput > 0)
+	if (hStdOutput != NULL)
 	{
 		DWORD mode;
 		if (GetConsoleMode(hStdOutput, &mode))
