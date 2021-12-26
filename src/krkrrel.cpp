@@ -856,9 +856,11 @@ void SetFileList(TKrkrRelConfig *config)
 	while (!dirs.empty())
 	{
 		tjs_string name = dirs.back();
+		tjs_string name_for_search = name;
+		name_for_search += TJS_W("*");
 		dirs.pop_back();
 		WIN32_FIND_DATA find_data;
-		HANDLE find_handle = FindFirstFile(name.c_str(), &find_data);
+		HANDLE find_handle = FindFirstFile(name_for_search.c_str(), &find_data);
 
 		if (find_handle == INVALID_HANDLE_VALUE)
 		{
@@ -886,7 +888,7 @@ void SetFileList(TKrkrRelConfig *config)
 			}
 			else
 			{
-				config->FileList.push_back(tjs_string(name.c_str() + baselen) + file_name + TJS_W("\\"));
+				config->FileList.push_back(tjs_string(name.c_str() + baselen) + file_name);
 			}
 		}
 		while (FindNextFile(find_handle, &find_data));
