@@ -121,6 +121,8 @@ jobs:
     - name: Prepare artifacts for release
       run: |
         pwd;find . | sort | sed '1d;s/^\.//;s/\/\([^/]*\)$/|--\1/;s/\/[^/|]*/|  /g'
+        chmod +x krkrrel-ubuntu/krkrrel
+        chmod +x krkrrel-macos/krkrrel
         7z a -tzip krkrrel-ubuntu.zip krkrrel-ubuntu/*
         7z a -tzip krkrrel-win32.zip krkrrel-win32/*
         7z a -tzip krkrrel-macos.zip krkrrel-macos/*
