@@ -115,6 +115,10 @@ jobs:
       with:
         name: krkrrel-macos
 
+    - name: List downloaded files
+    　　　　run: |
+        ls -la
+
     - name: Prepare artifacts for release
       run: |
         7z a -tzip krkrrel-ubuntu.zip /home/runner/work/krkrrel-ng/krkrrel-ng/krkrrel-ubuntu/*
