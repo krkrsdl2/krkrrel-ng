@@ -117,9 +117,9 @@ jobs:
 
     - name: Prepare artifacts for release
       run: |
-        7z a -tzip krkrrel-ubuntu.zip krkrrel-ubuntu/*
-        7z a -tzip krkrrel-win32.zip krkrrel-win32/*
-        7z a -tzip krkrrel-macos.zip krkrrel-macos/*
+        7z a -tzip krkrrel-ubuntu.zip /home/runner/work/krkrrel-ng/krkrrel-ng/krkrrel-ubuntu/*
+        7z a -tzip krkrrel-win32.zip /home/runner/work/krkrrel-ng/krkrrel-ng/krkrrel-win32/*
+        7z a -tzip krkrrel-macos.zip /home/runner/work/krkrrel-ng/krkrrel-ng/krkrrel-macos/*
 
     - name: Create prerelease
       if: github.ref == 'refs/heads/main'
