@@ -115,12 +115,9 @@ jobs:
       with:
         name: krkrrel-macos
 
-    - name: List downloaded files
-    　　　　run: |
-        ls -la
-
     - name: Prepare artifacts for release
       run: |
+        pwd;find . | sort | sed '1d;s/^\.//;s/\/\([^/]*\)$/|--\1/;s/\/[^/|]*/|  /g'
         7z a -tzip krkrrel-ubuntu.zip /home/runner/work/krkrrel-ng/krkrrel-ng/krkrrel-ubuntu/*
         7z a -tzip krkrrel-win32.zip /home/runner/work/krkrrel-ng/krkrrel-ng/krkrrel-win32/*
         7z a -tzip krkrrel-macos.zip /home/runner/work/krkrrel-ng/krkrrel-ng/krkrrel-macos/*
