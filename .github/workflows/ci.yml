@@ -71,7 +71,7 @@ jobs:
           name: krkrrel-win32
           path: build/krkrrel.exe
   build-macos:
-    runs-on: macos-10.15
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v2
         with:
@@ -87,6 +87,8 @@ jobs:
             ${{ runner.os }}-pip
       - run: python -m pip install --upgrade meson ninja
       - run: meson setup build/
+        env:
+           "CMAKE_OSX_ARCHITECTURES": "x86_64;arm64"
       - run: meson compile -C build
       - uses: actions/upload-artifact@master
         with:
