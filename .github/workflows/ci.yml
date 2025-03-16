@@ -21,17 +21,20 @@ on:
 
 jobs:
   build-ubuntu:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:20.04
+      options: "--user 0"
     steps:
-      - uses: actions/checkout@v2
+      - run: apt-get -y update
+      - run: apt-get -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' install git build-essential
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
-      - run: sudo apt-get update
-      - run: sudo apt-get install build-essential
-      - uses: actions/setup-python@v1
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.x'
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip
@@ -45,19 +48,22 @@ jobs:
           name: krkrrel-ubuntu
           path: build/krkrrel
   build-win32:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:20.04
+      options: "--user 0"
     steps:
-      - uses: actions/checkout@v2
+      - run: apt-get -y update
+      - run: apt-get -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' install git build-essential mingw-w64
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
-      - run: sudo apt-get update
-      - run: sudo apt-get install build-essential mingw-w64
-      - run: sudo update-alternatives --set i686-w64-mingw32-gcc /usr/bin/i686-w64-mingw32-gcc-posix
-      - run: sudo update-alternatives --set i686-w64-mingw32-g++ /usr/bin/i686-w64-mingw32-g++-posix
-      - uses: actions/setup-python@v1
+      - run: update-alternatives --set i686-w64-mingw32-gcc /usr/bin/i686-w64-mingw32-gcc-posix
+      - run: update-alternatives --set i686-w64-mingw32-g++ /usr/bin/i686-w64-mingw32-g++-posix
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.x'
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip
@@ -73,13 +79,13 @@ jobs:
   build-macos:
     runs-on: macos-14
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.x'
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip
@@ -95,45 +101,50 @@ jobs:
 
   create-release:
     needs: [build-ubuntu, build-win32, build-macos]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:20.04
+      options: "--user 0"
     if: github.ref == 'refs/heads/main'
     steps:
-    - name: Download ubuntu artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: krkrrel-ubuntu
-        path: krkrrel-ubuntu
+      - run: apt-get -y update
+      - run: apt-get -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' install p7zip-full
+      - name: Download ubuntu artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: krkrrel-ubuntu
+          path: krkrrel-ubuntu
 
-    - name: Download win32 artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: krkrrel-win32
-        path: krkrrel-win32
+      - name: Download win32 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: krkrrel-win32
+          path: krkrrel-win32
 
-    - name: Download macos artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: krkrrel-macos
-        path: krkrrel-macos
+      - name: Download macos artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: krkrrel-macos
+          path: krkrrel-macos
 
-    - name: Prepare artifacts for release
-      run: |
-        pwd;find . | sort | sed '1d;s/^\.//;s/\/\([^/]*\)$/|--\1/;s/\/[^/|]*/|  /g'
-        chmod +x krkrrel-ubuntu/krkrrel
-        chmod +x krkrrel-macos/krkrrel
-        7z a -tzip krkrrel-ubuntu.zip krkrrel-ubuntu/*
-        7z a -tzip krkrrel-win32.zip krkrrel-win32/*
-        7z a -tzip krkrrel-macos.zip krkrrel-macos/*
+      - name: Prepare artifacts for release
+        run: |
+          pwd;find . | sort | sed '1d;s/^\.//;s/\/\([^/]*\)$/|--\1/;s/\/[^/|]*/|  /g'
+          chmod +x krkrrel-ubuntu/krkrrel
+          chmod +x krkrrel-macos/krkrrel
+          7z a -tzip krkrrel-ubuntu.zip krkrrel-ubuntu/*
+          7z a -tzip krkrrel-win32.zip krkrrel-win32/*
+          7z a -tzip krkrrel-macos.zip krkrrel-macos/*
 
-    - name: Create prerelease
-      if: github.ref == 'refs/heads/main'
-      uses: marvinpinto/action-automatic-releases@latest
-      with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        prerelease: true
-        automatic_release_tag: "latest"
-        title: "Latest development builds"
-        files: |
-          krkrrel-ubuntu.zip
-          krkrrel-win32.zip
-          krkrrel-macos.zip
+      - name: Create prerelease
+        if: github.ref == 'refs/heads/main'
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: true
+          automatic_release_tag: "latest"
+          title: "Latest development builds"
+          files: |
+            krkrrel-ubuntu.zip
+            krkrrel-win32.zip
+            krkrrel-macos.zip
