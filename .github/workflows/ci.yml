@@ -52,8 +52,8 @@
               "artifact-to-archive" : "krkrrel",
               "artifact-path" : "build/*.zip",
               "example-project-path" : "",
-              "cmake-extra-configure-prepend" : "",
-              "cmake-extra-configure-append" : "",
+              "meson-extra-configure-prepend" : "",
+              "meson-extra-configure-append" : "",
               "container" : "ghcr.io/homebrew/ubuntu20.04:latest",
               "container-options" : "--user 0",
               "has-brew" : "true",
@@ -64,96 +64,26 @@
               "artifact-to-archive" : "krkrrel",
               "artifact-path" : "build/*.zip",
               "example-project-path" : "",
-              "cmake-extra-configure-prepend" : "",
-              "cmake-extra-configure-append" : "",
+              "meson-extra-configure-prepend" : "",
+              "meson-extra-configure-append" : "",
               "container" : "ubuntu:20.04",
               "container-options" : "--user 0",
               "has-brew" : "false",
               "runs-on" : "ubuntu-24.04-arm"
             },
             {
-              "target-name" : "win32-i686-gcc",
+              "target-name" : "win32",
               "artifact-to-archive" : "*.exe",
               "artifact-path" : "build/*.zip",
               "example-project-path" : "",
-              "cmake-extra-configure-prepend" : "",
-              "cmake-extra-configure-append" : "-DCMAKE_SYSTEM_NAME=Windows -DCMAKE_FIND_ROOT_PATH=/dev/null -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_PACKAGE=ONLY",
+              "meson-extra-configure-prepend" : "",
+              "meson-extra-configure-append" : "--cross-file ./external/meson_toolchains/mingw32_meson.ini",
               "container" : "ghcr.io/uyjulian/tvp_win32_build_container:latest",
               "container-options" : "--user 0",
               "has-brew" : "true",
               "runs-on" : "ubuntu-latest",
               "triplet" : "i686-w64-mingw32",
               "cmake-system-compiler" : "i686"
-            },
-            {
-              "target-name" : "win32-amd64-gcc",
-              "artifact-to-archive" : "*.exe",
-              "artifact-path" : "build/*.zip",
-              "example-project-path" : "",
-              "cmake-extra-configure-prepend" : "",
-              "cmake-extra-configure-append" : "-DCMAKE_SYSTEM_NAME=Windows -DCMAKE_FIND_ROOT_PATH=/dev/null -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_PACKAGE=ONLY",
-              "container" : "ghcr.io/uyjulian/tvp_win32_build_container:latest",
-              "container-options" : "--user 0",
-              "has-brew" : "true",
-              "runs-on" : "ubuntu-latest",
-              "triplet" : "x86_64-w64-mingw32",
-              "cmake-system-compiler" : "amd64"
-            },
-            {
-              "target-name" : "win32-i686-clang",
-              "artifact-to-archive" : "*.exe",
-              "artifact-path" : "build/*.zip",
-              "example-project-path" : "",
-              "cmake-extra-configure-prepend" : "",
-              "cmake-extra-configure-append" : "-DCMAKE_SYSTEM_NAME=Windows -DCMAKE_FIND_ROOT_PATH=/dev/null -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_PACKAGE=ONLY",
-              "container" : "ghcr.io/uyjulian/tvp_win32_build_container:latest",
-              "container-options" : "--user 0",
-              "has-brew" : "true",
-              "runs-on" : "ubuntu-latest",
-              "triplet" : "i686-w64-mingw32",
-              "cmake-system-compiler" : "i686"
-            },
-            {
-              "target-name" : "win32-amd64-clang",
-              "artifact-to-archive" : "*.exe",
-              "artifact-path" : "build/*.zip",
-              "example-project-path" : "",
-              "cmake-extra-configure-prepend" : "",
-              "cmake-extra-configure-append" : "-DCMAKE_SYSTEM_NAME=Windows -DCMAKE_FIND_ROOT_PATH=/dev/null -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_PACKAGE=ONLY",
-              "container" : "ghcr.io/uyjulian/tvp_win32_build_container:latest",
-              "container-options" : "--user 0",
-              "has-brew" : "true",
-              "runs-on" : "ubuntu-latest",
-              "triplet" : "x86_64-w64-mingw32",
-              "cmake-system-compiler" : "amd64"
-            },
-            {
-              "target-name" : "win32-arm-clang",
-              "artifact-to-archive" : "*.exe",
-              "artifact-path" : "build/*.zip",
-              "example-project-path" : "",
-              "cmake-extra-configure-prepend" : "",
-              "cmake-extra-configure-append" : "-DCMAKE_SYSTEM_NAME=Windows -DCMAKE_FIND_ROOT_PATH=/dev/null -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_PACKAGE=ONLY",
-              "container" : "ghcr.io/uyjulian/tvp_win32_build_container:latest",
-              "container-options" : "--user 0",
-              "has-brew" : "true",
-              "runs-on" : "ubuntu-latest",
-              "triplet" : "armv7-w64-mingw32",
-              "cmake-system-compiler" : "arm"
-            },
-            {
-              "target-name" : "win32-arm64-clang",
-              "artifact-to-archive" : "*.exe",
-              "artifact-path" : "build/*.zip",
-              "example-project-path" : "",
-              "cmake-extra-configure-prepend" : "",
-              "cmake-extra-configure-append" : "-DCMAKE_SYSTEM_NAME=Windows -DCMAKE_FIND_ROOT_PATH=/dev/null -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_PACKAGE=ONLY",
-              "container" : "ghcr.io/uyjulian/tvp_win32_build_container:latest",
-              "container-options" : "--user 0",
-              "has-brew" : "true",
-              "runs-on" : "ubuntu-latest",
-              "triplet" : "aarch64-w64-mingw32",
-              "cmake-system-compiler" : "arm64"
             }
           ]
         }
@@ -183,7 +113,7 @@
         {
           "name" : "Install additional dependencies (No Homebrew)",
           "if" : "matrix.platform.target-name == 'web' || matrix.platform.target-name == 'switch' || matrix.platform.target-name == 'ubuntu-arm64'",
-          "run" : "apt-get -y update && apt-get -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' install p7zip-full cmake make ninja-build git curl"
+          "run" : "apt-get -y update && apt-get -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' install p7zip-full cmake make ninja-build git curl meson"
         },
         {
           "name" : "Set up Homebrew environment for Github Actions",
@@ -193,12 +123,7 @@
         {
           "name" : "Set up default build tools (Homebrew)",
           "if" : "matrix.platform.has-brew == 'true'",
-          "run" : "sudo -H -u linuxbrew bash -c 'cd /home/linuxbrew && /home/linuxbrew/.linuxbrew/bin/brew install p7zip make nasm ninja cmake'"
-        },
-        {
-          "name" : "Set up extra CMake parameters",
-          "if" : "startsWith(matrix.platform.target-name, 'win32-')",
-          "run" : "printf '%s\\n' 'CMAKE_EXTRA_PARAMS=-DCMAKE_SYSTEM_PROCESSOR=${{ matrix.platform.cmake-system-compiler }} -DCMAKE_C_COMPILER=${{ matrix.platform.triplet }}-gcc -DCMAKE_CXX_COMPILER=${{ matrix.platform.triplet }}-g++ -DCMAKE_RC_COMPILER=${{ matrix.platform.triplet }}-windres' >> $GITHUB_ENV"
+          "run" : "sudo -H -u linuxbrew bash -c 'cd /home/linuxbrew && /home/linuxbrew/.linuxbrew/bin/brew install p7zip make nasm ninja cmake meson'"
         },
         {
           "name" : "Set up mingw-w64 for Clang",
@@ -234,12 +159,12 @@
         {
           "name" : "Configure project (General)",
           "if" : "matrix.platform.target-name != 'android'",
-          "run" : "${{ matrix.platform.cmake-extra-configure-prepend }} cmake -S . -B build $CMAKE_EXTRA_PARAMS ${{ matrix.platform.cmake-extra-configure-append }} -DCMAKE_BUILD_TYPE=Release"
+          "run" : "${{ matrix.platform.meson-extra-configure-prepend }} meson setup build/ ${{ matrix.platform.meson-extra-configure-append }}"
         },
         {
           "name" : "Build project (General)",
           "if" : "matrix.platform.target-name != 'android'",
-          "run" : "cmake --build build"
+          "run" : "meson compile -C build"
         },
         {
           "name" : "Build project (Android)",
@@ -249,7 +174,7 @@
         {
           "name" : "Archive artifact (General)",
           "if" : "matrix.platform.artifact-to-archive != ''",
-          "run" : "cd build && 7z a -tzip ${{ github.event.repository.name }}-${{ matrix.platform.target-name }}.zip ${{ matrix.platform.artifact-to-archive }}"
+          "run" : "cd build && 7z a -tzip krkrrel-${{ matrix.platform.target-name }}.zip ${{ matrix.platform.artifact-to-archive }}"
         },
         {
           "name" : "Rename artifact (Android)",
@@ -294,7 +219,7 @@
         },
         {
           "name" : "Archive artifact",
-          "run" : "cd build && 7z a -tzip ${{ github.event.repository.name }}-macos.zip krkrrel"
+          "run" : "cd build && 7z a -tzip krkrrel-macos.zip krkrrel"
         },
         {
           "name" : "Upload artifact",
