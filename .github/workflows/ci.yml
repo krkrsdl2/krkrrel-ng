@@ -164,7 +164,7 @@
         {
           "name" : "Build project (General)",
           "if" : "matrix.platform.target-name != 'android'",
-          "run" : "meson compile -C build"
+          "run" : "ninja -C build"
         },
         {
           "name" : "Build project (Android)",
@@ -215,7 +215,7 @@
         },
         {
           "name" : "Build project",
-          "run" : "meson compile -C build"
+          "run" : "ninja -C build"
         },
         {
           "name" : "Archive artifact",
