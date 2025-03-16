@@ -174,7 +174,7 @@
         {
           "name" : "Archive artifact (General)",
           "if" : "matrix.platform.artifact-to-archive != ''",
-          "run" : "cd build && 7z a -tzip krkrrel-${{ matrix.platform.target-name }}.zip ${{ matrix.platform.artifact-to-archive }}"
+          "run" : "cd build && mkdir krkrrel-${{ matrix.platform.target-name }} && cp ${{ matrix.platform.artifact-to-archive }} krkrrel-${{ matrix.platform.target-name }} && 7z a -tzip krkrrel-${{ matrix.platform.target-name }}.zip krkrrel-${{ matrix.platform.target-name }}"
         },
         {
           "name" : "Rename artifact (Android)",
@@ -219,7 +219,7 @@
         },
         {
           "name" : "Archive artifact",
-          "run" : "cd build && 7z a -tzip krkrrel-macos.zip krkrrel"
+          "run" : "cd build && mkdir krkrrel-macos && cp krkrrel krkrrel-macos && 7z a -tzip krkrrel-macos.zip krkrrel-macos"
         },
         {
           "name" : "Upload artifact",
