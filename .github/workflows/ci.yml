@@ -1,5 +1,5 @@
 {
-  "name" : "Continuous Integration (Kirikiri SDL2)",
+  "name" : "Continuous Integration",
   "on" : {
     "push" : {
       "paths" : [
