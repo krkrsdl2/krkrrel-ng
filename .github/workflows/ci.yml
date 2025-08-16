@@ -126,6 +126,11 @@
           "run" : "sudo -H -E -u linuxbrew bash -c 'cd /home/linuxbrew && /home/linuxbrew/.linuxbrew/bin/brew install p7zip make nasm ninja cmake meson'"
         },
         {
+          "name" : "Set up extra CMake parameters",
+          "if" : "startsWith(matrix.platform.target-name, 'win32')",
+          "run" : "printf '%s\\n' 'CMAKE_EXTRA_PARAMS=-DCMAKE_SYSTEM_PROCESSOR=${{ matrix.platform.cmake-system-compiler }} -DCMAKE_C_COMPILER=${{ matrix.platform.triplet }}-gcc -DCMAKE_CXX_COMPILER=${{ matrix.platform.triplet }}-g++ -DCMAKE_RC_COMPILER=${{ matrix.platform.triplet }}-windres' >> $GITHUB_ENV"
+        },
+        {
           "name" : "Set up mingw-w64 for Clang",
           "if" : "contains(matrix.platform.target-name, '-clang')",
           "run" : "printf '%s\\n' '/opt/llvm-mingw/bin' >> $GITHUB_PATH"
