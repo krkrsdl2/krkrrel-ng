@@ -1,6 +1,3 @@
 [submodule "external/zlib"]
 	path = external/zlib
 	url = ../zlib
-[submodule "external/meson_toolchains"]
-	path = external/meson_toolchains
-	url = ../meson_toolchains

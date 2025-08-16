@@ -36,11 +36,8 @@ git clone --recursive https://github.com/krkrsdl2/krkrrel-ng
 
 ## ビルディング
 
-このプロジェクトは、Mesonビルドシステムを使用してビルドできます。  
-Mesonビルドシステムの詳細については、次の場所をご覧ください： https://mesonbuild.com/
- 
-Mesonツールチェーンファイルは、[mingw-w64](http://mingw-w64.org/doku.php)を使用する場合など、異なるプラットフォームへのクロスコンパイルに使用できます。    
-便宜上、Mesonツールチェーンファイルは次の場所に置いてあります：https://github.com/krkrsdl2/meson_toolchains  
+このプロジェクトは、CMakeビルドシステムを使用してビルドできます。  
+CMakeビルドシステムの詳細については、次の場所をご覧ください： https://cmake.org/  
 
 ## オリジナルプロジェクト
 

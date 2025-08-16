@@ -36,11 +36,8 @@ If you do not use the exact command above, source files will be missing files si
 
 ## Building
 
-This project can be built by using the Meson build system.  
-For more information about the system, please visit the following location: https://mesonbuild.com/  
-
-Meson toolchain files can be used to cross compile to different platforms, such as when using [mingw-w64](http://mingw-w64.org/doku.php).  
-For your convenience, Meson toolchain files are located here: https://github.com/krkrsdl2/meson_toolchains  
+This project can be built by using the CMake build system.  
+For more information about the system, please visit the following location: https://cmake.org/  
 
 ## Original project
 

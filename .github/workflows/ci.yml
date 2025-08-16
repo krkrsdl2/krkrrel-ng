@@ -52,8 +52,8 @@
               "artifact-to-archive" : "krkrrel",
               "artifact-path" : "build/*.zip",
               "example-project-path" : "",
-              "meson-extra-configure-prepend" : "",
-              "meson-extra-configure-append" : "",
+              "cmake-extra-configure-prepend" : "",
+              "cmake-extra-configure-append" : "",
               "container" : "ghcr.io/homebrew/ubuntu20.04:latest",
               "container-options" : "--user 0",
               "has-brew" : "true",
@@ -64,8 +64,8 @@
               "artifact-to-archive" : "krkrrel",
               "artifact-path" : "build/*.zip",
               "example-project-path" : "",
-              "meson-extra-configure-prepend" : "",
-              "meson-extra-configure-append" : "",
+              "cmake-extra-configure-prepend" : "",
+              "cmake-extra-configure-append" : "",
               "container" : "ubuntu:20.04",
               "container-options" : "--user 0",
               "has-brew" : "false",
@@ -76,8 +76,8 @@
               "artifact-to-archive" : "*.exe",
               "artifact-path" : "build/*.zip",
               "example-project-path" : "",
-              "meson-extra-configure-prepend" : "",
-              "meson-extra-configure-append" : "--cross-file ./external/meson_toolchains/mingw32_meson.ini",
+              "cmake-extra-configure-prepend" : "",
+              "cmake-extra-configure-append" : "-DCMAKE_SYSTEM_NAME=Windows -DCMAKE_FIND_ROOT_PATH=/dev/null -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY -DCMAKE_FIND_ROOT_PATH_MODE_PACKAGE=ONLY",
               "container" : "ghcr.io/uyjulian/tvp_win32_build_container:latest",
               "container-options" : "--user 0",
               "has-brew" : "true",
@@ -159,12 +159,12 @@
         {
           "name" : "Configure project (General)",
           "if" : "matrix.platform.target-name != 'android'",
-          "run" : "${{ matrix.platform.meson-extra-configure-prepend }} meson setup build/ ${{ matrix.platform.meson-extra-configure-append }}"
+          "run" : "${{ matrix.platform.cmake-extra-configure-prepend }} cmake -S . -B build $CMAKE_EXTRA_PARAMS ${{ matrix.platform.cmake-extra-configure-append }} -DCMAKE_BUILD_TYPE=Release"
         },
         {
           "name" : "Build project (General)",
           "if" : "matrix.platform.target-name != 'android'",
-          "run" : "ninja -C build"
+          "run" : "cmake --build build"
         },
         {
           "name" : "Build project (Android)",
