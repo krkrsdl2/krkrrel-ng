@@ -123,7 +123,7 @@
         {
           "name" : "Set up default build tools (Homebrew)",
           "if" : "matrix.platform.has-brew == 'true'",
-          "run" : "sudo -H -u linuxbrew bash -c 'cd /home/linuxbrew && /home/linuxbrew/.linuxbrew/bin/brew install p7zip make nasm ninja cmake meson'"
+          "run" : "sudo -H -E -u linuxbrew bash -c 'cd /home/linuxbrew && /home/linuxbrew/.linuxbrew/bin/brew install p7zip make nasm ninja cmake meson'"
         },
         {
           "name" : "Set up mingw-w64 for Clang",
